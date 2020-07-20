@@ -1,0 +1,767 @@
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, blog, contenttypes, sessions
+Running migrations:
+  Applying blog.0001_initial... OK
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py shell
+Python 3.7.6 (default, Jan  8 2020, 20:23:39) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> cls
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'cls' is not defined
+>>> cls
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'cls' is not defined
+>>> from blog.models import Post
+>>> from django.contrib.auth.models import User
+>>> User.objects.all()
+<QuerySet [<User: sadashiv>, <User: testuser>]>
+>>> User.objects.last()
+<User: testuser>
+>>> User.objects.filter(username='sadashiv')
+<QuerySet [<User: sadashiv>]>
+>>> User.objects.filter(username='sadashiv').first()
+<User: sadashiv>
+>>> User.objects.filter(username='sadashiv').first()
+<User: sadashiv>
+>>> user = User.objects.filter(username='sadashiv').first()
+>>> print(user)
+sadashiv
+>>> clear
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'clear' is not defined
+>>> cls
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'cls' is not defined
+>>> user
+<User: sadashiv>
+>>> user.id
+1
+>>> user.pk
+1
+>>> user=User.obects.get(id=1)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'User' has no attribute 'obects'
+>>> user = User.objects.filter(username='sadashiv').first()
+>>> user
+<User: sadashiv>
+>>> user=User.objects.get(id=1)
+>>> user
+<User: sadashiv>
+>>> user.id
+1
+>>> Post.objects.all()
+<QuerySet []>
+>>> post_1=Post(title='Blog 1',content='First Post Content',author=user)
+>>> Post.objects.all()
+<QuerySet []>
+>>> post_1.save()
+>>> Post.objects.all()
+<QuerySet [<Post: Post object (1)>]>
+>>> claer
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'claer' is not defined
+>>> clear()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'clear' is not defined
+>>> cls()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'cls' is not defined
+>>> Post.objects.all().first()
+<Post: Post object (1)>
+>>> exit()
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py shell
+Python 3.7.6 (default, Jan  8 2020, 20:23:39) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from blog.models import Post
+>>> from django.contrib.auth.models import USeer
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ImportError: cannot import name 'USeer' from 'django.contrib.auth.models' (C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\contrib\auth\models.py)
+>>> from django.contrib.auth.models import User
+>>> Post.objects.all()
+<QuerySet [<Post: Blog 1>]>
+>>> user=User.objects.filter(username='sadasiv').first()
+>>> user=User.objects.filter(username='sadasiv').first()
+>>> user
+>>> print(user)
+None
+>>> user=User.objects.filter(username='sadashiv').first()
+>>> user
+<User: sadashiv>
+>>> ^Z^Z
+
+now exiting InteractiveConsole...
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py shell
+Python 3.7.6 (default, Jan  8 2020, 20:23:39) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from blog.models import Post
+>>> from django.contrib.auth.models import User
+>>> Post.objects.all()
+<QuerySet [<Post: Blog 1>]>
+>>> user=User.objects.filter(id=1)
+>>> user
+<QuerySet [<User: sadashiv>]>
+>>> user=User.objects.filter(id=1).first()
+>>> user
+<User: sadashiv>
+>>> post_2=Post(title='Blog 2',content='this is second post',author_id=user.id)
+>>> post_2.save()
+>>> Post.objects.all()
+<QuerySet [<Post: Blog 1>, <Post: Blog 2>]>
+>>> Post.objects.first()
+<Post: Blog 1>
+>>> post=Post.objects.last()
+>>> post.content
+'this is second post'
+>>> post.date_posted
+datetime.datetime(2020, 5, 21, 19, 54, 25, 231051, tzinfo=<UTC>)
+>>> post.author
+<User: sadashiv>
+>>> post=Post.objects.first()
+>>> post.author
+<User: sadashiv>
+>>> post.author.email
+'sadashivshinde98@gmail.com'
+>>> Post.objects.all(id=1)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: all() got an unexpected keyword argument 'id'
+>>> user
+<User: sadashiv>
+>>> user.post_set
+<django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x0000021E8B261848>
+>>> user.post_set.all
+<bound method BaseManager.all of <django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x0000021E8B29F9C8>>
+>>> user.post_set.all()
+<QuerySet [<Post: Blog 1>, <Post: Blog 2>]>
+>>> user.post_set
+<django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x0000021E8B29FD08>
+>>> user.post_set.create(title='Blog 3',content='third post')
+<Post: Blog 3>
+>>> user.post_set
+<django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x0000021E8B29FD08>
+>>> user.post_set.all()
+<QuerySet [<Post: Blog 1>, <Post: Blog 2>, <Post: Blog 3>]>
+>>> Post.objects.all()
+<QuerySet [<Post: Blog 1>, <Post: Blog 2>, <Post: Blog 3>]>
+>>> exit()
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 22, 2020 - 01:32:48
+Django version 3.0.6, using settings 'django_project1.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+Not Found: /
+[22/May/2020 01:32:53] "GET / HTTP/1.1" 404 2035
+Not Found: /favicon.ico
+[22/May/2020 01:32:53] "GET /favicon.ico HTTP/1.1" 404 2086
+Internal Server Error: /blog/
+Traceback (most recent call last):
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\MyPyWrk\django_project1\blog\views.py", line 25, in home
+    return render(request,'blog/home.html',context)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\template\backends\django.py", line 59, in render
+    context = make_context(context, request, autoescape=self.backend.engine.autoescape)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\template\context.py", line 270, in make_context
+    raise TypeError('context must be a dict rather than %s.' % context.__class__.__name__)
+TypeError: context must be a dict rather than QuerySet.
+[22/May/2020 01:32:59] "GET /blog/ HTTP/1.1" 500 84237
+[22/May/2020 01:33:37] "GET /admin/ HTTP/1.1" 200 4207
+[22/May/2020 01:33:38] "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[22/May/2020 01:33:38] "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+[22/May/2020 01:33:38] "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[22/May/2020 01:33:38] "GET /admin/ HTTP/1.1" 200 4207
+[22/May/2020 01:33:38] "GET /static/admin/css/fonts.css HTTP/1.1" 304 0
+[22/May/2020 01:33:39] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[22/May/2020 01:33:39] "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+[22/May/2020 01:33:39] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 304 0
+[22/May/2020 01:33:39] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+[22/May/2020 01:33:39] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 304 0
+[22/May/2020 01:33:44] "GET /admin/auth/user/ HTTP/1.1" 200 7060
+[22/May/2020 01:33:44] "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+[22/May/2020 01:33:44] "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+[22/May/2020 01:33:44] "GET /static/admin/js/core.js HTTP/1.1" 304 0
+[22/May/2020 01:33:44] "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+[22/May/2020 01:33:44] "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+[22/May/2020 01:33:44] "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+[22/May/2020 01:33:44] "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+[22/May/2020 01:33:44] "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+[22/May/2020 01:33:44] "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+[22/May/2020 01:33:44] "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+[22/May/2020 01:33:44] "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+[22/May/2020 01:33:44] "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+[22/May/2020 01:33:44] "GET /static/admin/img/icon-no.svg HTTP/1.1" 304 0
+[22/May/2020 01:33:44] "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+[22/May/2020 01:33:44] "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+[22/May/2020 01:33:47] "GET /admin/auth/user/1/change/ HTTP/1.1" 200 14289
+[22/May/2020 01:33:47] "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+[22/May/2020 01:33:47] "GET /static/admin/js/SelectFilter2.js HTTP/1.1" 304 0
+[22/May/2020 01:33:47] "GET /static/admin/js/admin/DateTimeShortcuts.js HTTP/1.1" 304 0
+[22/May/2020 01:33:47] "GET /static/admin/js/calendar.js HTTP/1.1" 304 0
+[22/May/2020 01:33:47] "GET /static/admin/js/SelectBox.js HTTP/1.1" 304 0
+[22/May/2020 01:33:47] "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+[22/May/2020 01:33:47] "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+[22/May/2020 01:33:47] "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+[22/May/2020 01:33:47] "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+[22/May/2020 01:33:47] "GET /static/admin/img/icon-unknown.svg HTTP/1.1" 304 0
+[22/May/2020 01:33:47] "GET /static/admin/img/selector-icons.svg HTTP/1.1" 304 0
+[22/May/2020 01:33:47] "GET /static/admin/img/icon-unknown-alt.svg HTTP/1.1" 304 0
+[22/May/2020 01:33:47] "GET /static/admin/img/icon-calendar.svg HTTP/1.1" 304 0
+[22/May/2020 01:33:47] "GET /static/admin/img/icon-clock.svg HTTP/1.1" 304 0
+[22/May/2020 01:34:02] "GET /admin/auth/user/ HTTP/1.1" 200 7060
+[22/May/2020 01:34:03] "GET /admin/ HTTP/1.1" 200 4207
+[22/May/2020 01:34:14] "GET /blog/about/ HTTP/1.1" 200 3525
+[22/May/2020 01:34:14] "GET /static/blog/main.css HTTP/1.1" 304 0
+Internal Server Error: /blog/
+Traceback (most recent call last):
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\MyPyWrk\django_project1\blog\views.py", line 25, in home
+    return render(request,'blog/home.html',context)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\shortcuts.py", line 19, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\template\backends\django.py", line 59, in render
+    context = make_context(context, request, autoescape=self.backend.engine.autoescape)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\template\context.py", line 270, in make_context
+    raise TypeError('context must be a dict rather than %s.' % context.__class__.__name__)
+TypeError: context must be a dict rather than QuerySet.
+[22/May/2020 01:34:20] "GET /blog/ HTTP/1.1" 500 84237
+E:\MyPyWrk\django_project1\blog\views.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "c:\users\sadashiv\anaconda3\lib\threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "c:\users\sadashiv\anaconda3\lib\threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\utils\autoreload.py", line 53, in wrapper
+    fn(*args, **kwargs)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\core\management\commands\runserver.py", line 117, in inner_run
+    self.check(display_num_errors=True)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\core\management\base.py", line 395, in check
+    include_deployment_checks=include_deployment_checks,
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\core\management\base.py", line 382, in _run_checks
+    return checks.run_checks(**kwargs)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\core\checks\registry.py", line 72, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\core\checks\urls.py", line 13, in check_url_config
+    return check_resolver(resolver)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\core\checks\urls.py", line 23, in check_resolver
+    return check_method()
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\urls\resolvers.py", line 407, in check
+    for pattern in self.url_patterns:
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\utils\functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\urls\resolvers.py", line 588, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\utils\functional.py", line 48, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\urls\resolvers.py", line 581, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "c:\users\sadashiv\anaconda3\lib\importlib\__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "E:\MyPyWrk\django_project1\django_project1\urls.py", line 21, in <module>
+    path('blog/', include('blog.urls')),
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\urls\conf.py", line 34, in include
+    urlconf_module = import_module(urlconf_module)
+  File "c:\users\sadashiv\anaconda3\lib\importlib\__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 967, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 677, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "E:\MyPyWrk\django_project1\blog\urls.py", line 2, in <module>
+    from . import views
+  File "E:\MyPyWrk\django_project1\blog\views.py", line 25
+    'posts' = Post.objects.all()
+            ^
+SyntaxError: invalid syntax
+
+E:\MyPyWrk\django_project1\blog\views.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 22, 2020 - 01:36:19
+Django version 3.0.6, using settings 'django_project1.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+[22/May/2020 01:36:24] "GET /blog/ HTTP/1.1" 200 4217
+[22/May/2020 01:41:32] "GET /blog/ HTTP/1.1" 200 4184
+[22/May/2020 01:41:44] "GET /blog/ HTTP/1.1" 200 4184
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 22, 2020 - 01:43:02
+Django version 3.0.6, using settings 'django_project1.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+[22/May/2020 01:43:06] "GET /admin/ HTTP/1.1" 200 4207
+E:\MyPyWrk\django_project1\blog\admin.py changed, reloading.
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 22, 2020 - 01:44:08
+Django version 3.0.6, using settings 'django_project1.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+[22/May/2020 01:44:10] "GET /admin/ HTTP/1.1" 200 4859
+[22/May/2020 01:44:32] "GET /admin/blog/post/ HTTP/1.1" 200 4734
+[22/May/2020 01:44:32] "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+[22/May/2020 01:44:34] "GET /admin/blog/post/1/change/ HTTP/1.1" 200 6901
+[22/May/2020 01:44:34] "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+[22/May/2020 01:44:53] "POST /admin/blog/post/1/change/ HTTP/1.1" 302 0
+[22/May/2020 01:44:53] "GET /admin/blog/post/ HTTP/1.1" 200 4914
+[22/May/2020 01:44:53] "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+[22/May/2020 01:45:01] "GET /admin/blog/post/3/change/ HTTP/1.1" 200 6893
+[22/May/2020 01:45:01] "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+[22/May/2020 01:45:09] "POST /admin/blog/post/3/change/ HTTP/1.1" 302 0
+[22/May/2020 01:45:09] "GET /admin/blog/post/ HTTP/1.1" 200 4914
+[22/May/2020 01:45:09] "GET /admin/jsi18n/ HTTP/1.1" 200 3223
+[22/May/2020 01:45:19] "GET /blog/ HTTP/1.1" 200 4192
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py makemigrations
+No changes detected
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py sqlmigrate blog 0001
+BEGIN;
+--
+-- Create model Post
+--
+CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(100) NOT NULL, "content" text NOT NULL, "date_posted" datetime NOT NULL, "author_id" integer NOT NULL REFERENCES "auth_user" ("id") DEFERRABLE INITIALLY DEFERRED);
+CREATE INDEX "blog_post_author_id_dd7a8485" ON "blog_post" ("author_id");
+COMMIT;
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py sqlmigrate blog 0002
+CommandError: Cannot find a migration matching '0002' from app 'blog'. Is it in INSTALLED_APPS?
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, blog, contenttypes, sessions
+Running migrations:
+  No migrations to apply.
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py shell
+Python 3.7.6 (default, Jan  8 2020, 20:23:39) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from blog.models import Post
+>>> from django.contrib.auth.models import User
+>>> User.objects.all()
+<QuerySet [<User: sadashiv>, <User: testuser>]>
+>>> User.objects.all().last()
+<User: testuser>
+>>> user=User.objects.filter(id=1)
+>>> user
+<QuerySet [<User: sadashiv>]>
+>>> user.id
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'id'
+>>> user.content
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'content'
+>>> user=User.objects.filter(id=1).first()
+>>> user
+<User: sadashiv>
+>>> user.content
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'User' object has no attribute 'content'
+>>> user.id
+1
+>>> user.pk
+1
+>>> user=User.objects.get(id=1)
+>>> use
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'use' is not defined
+>>> user
+<User: sadashiv>
+>>> newpost=Post(title='Blog 4',content='New Post',author='testuser')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\base.py", line 482, in __init__
+    _setattr(self, field.name, rel_obj)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\fields\related_descriptors.py", line 219, in __set__
+    self.field.remote_field.model._meta.object_name,
+ValueError: Cannot assign "'testuser'": "Post.author" must be a "User" instance.
+>>> newpost=Post(title='Blog 4',content='New Post',author=user)
+>>> newpost.save()
+>>> Post.objects.all()
+<QuerySet [<Post: Blog 1>, <Post: Blog 2>, <Post: Blog 3>, <Post: Blog 4>]>
+>>> exit()
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py shell
+Python 3.7.6 (default, Jan  8 2020, 20:23:39) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from blog.models import Post
+>>> from django.contrib.auth.models import Userr
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ImportError: cannot import name 'Userr' from 'django.contrib.auth.models' (C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\contrib\auth\models.py)
+>>> from django.contrib.auth.models import User
+>>> Post.objects.all()
+<QuerySet [<Post: Blog 1>, <Post: Blog 2>, <Post: Blog 3>, <Post: Blog 4>]>
+>>> user=User.objects.filter(username='testuser').first()
+>>> user
+<User: testuser>
+>>> newpost=Post(title='Blog 5',content='Last one for today')
+>>> newpost.save()
+Traceback (most recent call last):
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\backends\utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\backends\sqlite3\base.py", line 396, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: blog_post.author_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\base.py", line 746, in save
+    force_update=force_update, update_fields=update_fields)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\base.py", line 784, in save_base
+    force_update, using, update_fields,
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\base.py", line 887, in _save_table
+    results = self._do_insert(cls._base_manager, using, fields, returning_fields, raw)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\base.py", line 926, in _do_insert
+    using=using, raw=raw,
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\query.py", line 1204, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\sql\compiler.py", line 1391, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\backends\utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\backends\utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\backends\utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\backends\utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\backends\utils.py", line 86, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\backends\sqlite3\base.py", line 396, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: blog_post.author_id
+>>> newpost=Post(title='Blog 5',content='Last one for today',author.id=user.id)
+  File "<console>", line 1
+SyntaxError: keyword can't be an expression
+>>> newpost=Post(title='Blog 5',content='Last one for today',author_id=user.id)
+>>> newpost.save()
+>>> Post.objects.all(0
+... Post.objects.all()
+  File "<console>", line 2
+    Post.objects.all()
+       ^
+SyntaxError: invalid syntax
+>>> Post.objects.all()
+<QuerySet [<Post: Blog 1>, <Post: Blog 2>, <Post: Blog 3>, <Post: Blog 4>, <Post: Blog 5>]>
+>>> post=Post.objects.last()
+>>> post.author()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: 'User' object is not callable
+>>> post.author
+<User: testuser>
+>>> post.date-posted
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Post' object has no attribute 'date'
+>>> post.date_posted
+datetime.datetime(2020, 5, 21, 21, 40, 9, 628381, tzinfo=<UTC>)
+>>> post.content
+'Last one for today'
+>>> post.user.email
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Post' object has no attribute 'user'
+>>> post.author.email
+'testuser@gmail.com'
+>>> user=User.objects.filter(id=2)
+>>> Post.objects.filter(author=user)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\query.py", line 252, in __repr__
+    data = list(self[:REPR_OUTPUT_SIZE + 1])
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\query.py", line 276, in __iter__
+    self._fetch_all()
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\query.py", line 1261, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\query.py", line 57, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\sql\compiler.py", line 1138, in execute_sql
+    sql, params = self.as_sql()
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\sql\compiler.py", line 505, in as_sql
+    where, w_params = self.compile(self.where) if self.where is not None else ("", [])
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\sql\compiler.py", line 422, in compile
+    sql, params = node.as_sql(self, self.connection)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\sql\where.py", line 81, in as_sql
+    sql, params = compiler.compile(child)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\sql\compiler.py", line 422, in compile
+    sql, params = node.as_sql(self, self.connection)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\fields\related_lookups.py", line 130, in as_sql
+    return super().as_sql(compiler, connection)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\lookups.py", line 177, in as_sql
+    rhs_sql, rhs_params = self.process_rhs(compiler, connection)
+  File "C:\Users\sadashiv\Environments\My_django\lib\site-packages\django\db\models\lookups.py", line 270, in process_rhs
+    'The QuerySet value for an exact lookup must be limited to '
+ValueError: The QuerySet value for an exact lookup must be limited to one result using slicing.
+>>> Post.objects.filter(author_id=user.id)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'id'
+>>> Post.objects.all(author_id=user.id)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'QuerySet' object has no attribute 'id'
+>>> Post.objects.all(author=user)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: all() got an unexpected keyword argument 'author'
+>>> user
+<QuerySet [<User: testuser>]>
+>>> user=User.objects.filter(id=2).first()
+>>> user
+<User: testuser>
+>>> Post.objects.all(author=user)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: all() got an unexpected keyword argument 'author'
+>>> Post.objects.all(author_id=user.id)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: all() got an unexpected keyword argument 'author_id'
+>>> Post.objects.filter(author=user)
+<QuerySet [<Post: Blog 3>, <Post: Blog 5>]>
+>>> user
+<User: testuser>
+>>> user.post_set
+<django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x0000022CDA441E48>
+>>> user.post_set.all
+<bound method BaseManager.all of <django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x0000022CDA4327C8>>
+>>> user.post_set.all()
+<QuerySet [<Post: Blog 3>, <Post: Blog 5>]>
+>>> user.post_set.create(title='Blog 6',content='Ok this is the last')
+<Post: Blog 6>
+>>> Post.objects.filter(author=user)
+<QuerySet [<Post: Blog 3>, <Post: Blog 5>, <Post: Blog 6>]>
+>>> Post.objects.all()
+<QuerySet [<Post: Blog 1>, <Post: Blog 2>, <Post: Blog 3>, <Post: Blog 4>, <Post: Blog 5>, <Post: Blog 6>]>
+>>>
+
+
+
+
+
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py shell
+Python 3.7.6 (default, Jan  8 2020, 20:23:39) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> import json
+>>> from blog.models import Post
+>>> with open('posts.json') as f:
+... posts_json = json.load(f)
+  File "<console>", line 2
+    posts_json = json.load(f)
+             ^
+IndentationError: expected an indented block
+>>> with open('posts.json') as f:
+... posts_json=json.load(f)
+  File "<console>", line 2
+    posts_json=json.load(f)
+             ^
+IndentationError: expected an indented block
+>>> posts_json=json.load(f)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'f' is not defined
+>>> with open('posts.json') as f:
+... posts_json = json.load(f)
+  File "<console>", line 2
+    posts_json = json.load(f)
+             ^
+IndentationError: expected an indented block
+>>> exit()
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py shell
+Python 3.7.6 (default, Jan  8 2020, 20:23:39) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> import json
+>>> from blog.models import Post
+>>> with open('posts.json') as f:
+... posts_json = json.load(f)
+  File "<console>", line 2
+    posts_json = json.load(f)
+             ^
+IndentationError: expected an indented block
+>>> with open('posts.json') as f:
+...     posts_json=json.load(f)
+...
+Traceback (most recent call last):
+  File "<console>", line 2, in <module>
+  File "c:\users\sadashiv\anaconda3\lib\json\__init__.py", line 296, in load
+    parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "c:\users\sadashiv\anaconda3\lib\json\__init__.py", line 348, in loads
+    return _default_decoder.decode(s)
+  File "c:\users\sadashiv\anaconda3\lib\json\decoder.py", line 340, in decode
+    raise JSONDecodeError("Extra data", s, end)
+json.decoder.JSONDecodeError: Extra data: line 1 column 458 (char 457)
+>>>     posts_json=json.load(f)
+  File "<console>", line 1
+    posts_json=json.load(f)
+    ^
+IndentationError: unexpected indent
+>>> with open('posts.json') as f:
+...     posts_json = json.load(f)
+... for post in post_json:
+  File "<console>", line 3
+    for post in post_json:
+      ^
+SyntaxError: invalid syntax
+>>> for post in posts_json:
+...     post=Post(title=post['title]',content=post['contentt'],author_id=post['user_id'])
+  File "<console>", line 2
+    post=Post(title=post['title]',content=post['contentt'],author_id=post['user_id'])
+                                         ^
+SyntaxError: invalid syntax
+>>>     post=Post(title=post['title]',content=post['content'],author_id=post['user_id'])
+  File "<console>", line 1
+    post=Post(title=post['title]',content=post['content'],author_id=post['user_id'])
+    ^
+IndentationError: unexpected indent
+>>> for post in posts_json:
+...     post=Post(title=post['title]',content=post['content'],author_id=post['user_id'])
+  File "<console>", line 2
+    post=Post(title=post['title]',content=post['content'],author_id=post['user_id'])
+                                         ^
+SyntaxError: invalid syntax
+>>> exit()
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py shell
+Python 3.7.6 (default, Jan  8 2020, 20:23:39) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> import json
+>>> from blog.models import Post
+>>> with open('posts.json') as f:
+...     posts_json = json.load(f)
+...
+>>> for post in posts_json:
+...     post=Post(title=post['title'],content=post['content'],author_id=post['user_id'])
+...     post.save()
+...
+>>> exit()
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 26, 2020 - 08:55:09
+Django version 3.0.6, using settings 'django_project1.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+[26/May/2020 08:55:16] "GET /blog/ HTTP/1.1" 200 29331
+[26/May/2020 08:55:16] "GET /static/blog/main.css HTTP/1.1" 304 0
+[26/May/2020 08:55:16] "GET /media/profile_pics/sadashiv-img.jpeg HTTP/1.1" 304 0
+[26/May/2020 08:55:16] "GET /media/default.jpg HTTP/1.1" 304 0
+Not Found: /favicon.ico
+[26/May/2020 08:55:16] "GET /favicon.ico HTTP/1.1" 404 2704
+[26/May/2020 08:55:34] "GET /blog/post/32/ HTTP/1.1" 200 4241
+[26/May/2020 08:55:39] "GET /blog/post/31/ HTTP/1.1" 200 3884
+
+(My_django) (base) E:\MyPyWrk\django_project1>python manage.py shell
+Python 3.7.6 (default, Jan  8 2020, 20:23:39) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from django.core.paginator import Paginator
+>>> posts = ['1','2','3','4','5']
+>>> p=Paginator(posts,2)
+>>> p.num_pages
+3
+>>> for page in p.page_range:
+...     print(page)
+...
+1
+2
+3
+>>> p1 = p.page(1)
+>>>
+>>> p1
+<Page 1 of 3>
+>>> p1.number
+1
+>>> p1.object_list
+['1', '2']
+>>> p1.has_previous()
+False
+>>> p1.has_next()
+True
+>>> p3.has_next()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'p3' is not defined
+>>> p1.next_page_number()
+2
+>>> exit()
+
+(My_django) (base) E:\MyPyWrk\django_project1>
